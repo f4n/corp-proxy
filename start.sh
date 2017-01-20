@@ -2,13 +2,14 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# check if corp-proxy docker container is already running
 DOCKER_ID=`docker ps -a | grep corp-proxy:latest | awk '{print $1}'`
-
 if [ -n "$DOCKER_ID" ]
 then
-  $SCRIPT_DIR/stop.sh
+  exit 0;
 fi
 
+# otherwise start a new corp-proxy container
 docker run  -d  \
             --name corp-proxy \
             -v $SCRIPT_DIR/config/squid.conf:/etc/squid/squid.conf:ro \

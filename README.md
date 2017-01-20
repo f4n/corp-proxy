@@ -1,7 +1,17 @@
-Squid
+Corporate-Proxy Switcher
 =====
 
-Slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
+In some firms you have to use a proxy server to access the internet.
+This is a little bit annoying if you work on different locations or
+at home where a different proxy or none is available.
+
+With this image you have to configure just once all your proxy
+settings to **localhost:3128**. The actual proxy settings will be switched
+in the container automatically and you never have to reconfiguring your
+application settings (like browser proxy, package manager proxy, ...) separately.
+
+
+It's a slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
 
 How to use
 =========
@@ -22,6 +32,10 @@ start.sh # to start/restart corp-proxy
 
 ```
 stop.sh # to stop corp-proxy
+```
+
+```
+reconfigure.sh # add this script to your post-if.up and modify to match your network settings
 ```
 
 
