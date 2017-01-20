@@ -6,10 +6,15 @@ Slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
 How to use
 =========
 
-Execute before first use of start/stop
+Build
+-----
+Execute once before first use of start/stop
 ```
 build.sh # to create a docker image with the name corp-proxy
 ```
+
+Start/Stop
+-----
 
 ```
 start.sh # to start/restart corp-proxy
