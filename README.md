@@ -10,7 +10,7 @@ settings to **localhost:3128**. The actual proxy settings will be switched
 in the container automatically and you never have to reconfiguring your
 application settings (like browser proxy, package manager proxy, ...) separately.
 
-
+Thank you to [chrisdaish](https://github.com/chrisdaish/docker-squid) for the inital container.
 It's a slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
 
 How to use
