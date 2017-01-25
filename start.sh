@@ -6,7 +6,12 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOCKER_ID=`docker ps -a | grep corp-proxy:latest | awk '{print $1}'`
 if [ -n "$DOCKER_ID" ]
 then
-  exit 0;
+  DOCKER_ID_RUN=`docker ps | grep corp-proxy:latest | awk '{print $1}'`
+  if [ -n "$DOCKER_ID_RUN" ]
+  then
+    exit 0;
+  fi
+  docker rm $DOCKER_ID > /dev/null
 fi
 
 # otherwise start a new corp-proxy container
