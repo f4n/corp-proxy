@@ -1,3 +1,4 @@
 log/access.log
 log/cache.log
 config/squid.conf
+config/*.setting
