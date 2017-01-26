@@ -50,6 +50,8 @@ Start/Switch proxy setting
 
 I recommend to export the corp-proxy path to your PATH variable in the .bashrc
 
+After that you do the following
+
 ```
 proxy # just call this
 ```
