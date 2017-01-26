@@ -1,14 +1,14 @@
 Corporate-Proxy Switcher
 =====
 
-In some firms you have to use a proxy server to access the internet.
+In some companies you have to use a proxy server to access the internet.
 This is a little bit annoying if you work on different locations or
-at home where a different proxy or none is available.
+at home where none (or a different proxy) is available.
 
 With this image you have to configure just once all your proxy
 settings to **localhost:3128**. The actual proxy settings will be switched
-in the container automatically and you never have to reconfiguring your
-application settings (like browser proxy, package manager proxy, ...) separately.
+in the container and you never have to reconfiguring your application
+settings (like browser proxy, package manager proxy, dev-tools ...) separately.
 
 Thank you to [chrisdaish](https://github.com/chrisdaish/docker-squid) for the inital container.
 It's a slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
@@ -16,30 +16,47 @@ It's a slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
 How to use
 =========
 
+You have to build your container image once
+
 Build
 -----
-Execute once before first use of start/stop
 ```
+cd docker
 build.sh # to create a docker image with the name corp-proxy
 ```
-
-Start/Stop
------
-
+if you already behind a proxy use
 ```
-start.sh # to start/restart corp-proxy
+cd docker
+build.sh http://proxy-ip:proxy-port # to create a docker image with the name corp-proxy
 ```
 
-```
-stop.sh # to stop corp-proxy
-```
+Configuring
+-----------
+
+Available configurations will be store in *.setting files which will be
+linked to as squid.conf file by the start script.
+In the config folder tho basic setting files available,
+* 'default.setting' which is the "home" setting, no forward proxying
+* 'company.setting.example' which is a basic example of a company forwad proxy setting
+
+If you want to use it you have to rename company.setting.example to mycompanyname.setting
+and modify the file to match your company proxy settings.
+
+You could use as many .setting files as you want.
+
+
+Start/Switch proxy setting
+--------------------------
+
+I recommend to export the corp-proxy path to your PATH variable in the .bashrc
 
 ```
-reconfigure.sh # add this script to your post-if.up and modify to match your network settings
+proxy # just call this
 ```
 
 
-Run it on your own
+
+Expert Mode: Run it on your own
 ==========
 
 ```
