@@ -1,9 +1,9 @@
-FROM alpine:3.2
+FROM alpine:latest
 
 MAINTAINER m@k4r.me
 
 RUN apk update \
-    && apk add squid=3.5.23-r0 \
+    && apk add squid \
     && apk add curl \
     && rm -rf /var/cache/apk/*
 
