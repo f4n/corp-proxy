@@ -17,70 +17,74 @@ LAST_SELECTION=""
 if [ -f $LAST_SELECTION_FILE ];
 then
   VERSION_FILE=`cat $LAST_SELECTION_FILE`
+  CONFIG_FILE=$VERSION_FILE
   if [ -f $VERSION_FILE ]
   then
     LAST_SELECTION="$(basename $VERSION_FILE)"
   fi
 fi
 
-# create selection menu
-while [ true ]
-do
-  echo "Select Config:"
-  if [ -n "$LAST_SELECTION" ]
-  then
-    echo "(press return for $LAST_SELECTION)"
-  fi
-  echo ""
-  for (( j=0; j<$i; j++ ))
+if [ "$1" != "default" ]
+then
+  # create selection menu
+  while [ true ]
   do
-    if [ "${options[j]}" == "$LAST_SELECTION" ]
+    echo "Select Config:"
+    if [ -n "$LAST_SELECTION" ]
     then
-      echo -n " --> "
-    else
-      echo -n "     "
+      echo "(press return for $LAST_SELECTION)"
     fi
-    echo -n " $j) ${options[j]}"
     echo ""
-  done
+    for (( j=0; j<$i; j++ ))
+    do
+      if [ "${options[j]}" == "$LAST_SELECTION" ]
+      then
+        echo -n " --> "
+      else
+        echo -n "     "
+      fi
+      echo -n " $j) ${options[j]}"
+      echo ""
+    done
 
-  # read user selection input
-  read selection
+    # read user selection input
+    read selection
 
-  # if only return is pressed, check if we have a previous selection stored
-  if [ -z $selection ]
-  then
-    if [ -f $LAST_SELECTION_FILE ];
+    # if only return is pressed, check if we have a previous selection stored
+    if [ -z $selection ]
     then
-        CONFIG_FILE=`cat $LAST_SELECTION_FILE`
-        break
-    else
-      echo "No last selection found, select a config"
+      if [ -f $LAST_SELECTION_FILE ];
+      then
+          CONFIG_FILE=`cat $LAST_SELECTION_FILE`
+          break
+      else
+        echo "No last selection found, select a config"
+        echo ""
+        continue
+      fi
+    fi
+
+    # test if selection is a number
+    re='^[0-9]+$'
+    if ! [[ $selection =~ $re ]] ; then
+      echo "Not a number, try again"
       echo ""
       continue
     fi
-  fi
 
-  # test if selection is a number
-  re='^[0-9]+$'
-  if ! [[ $selection =~ $re ]] ; then
-    echo "Not a number, try again"
+    # test if selection exists
+    if [ ${options[selection]+exists} ]
+    then
+      echo "$CONFIG_PATH/${options[selection]}" > $LAST_SELECTION_FILE
+      #echo "$SCRIPT_PATH/versions/${options[selection]}"
+      CONFIG_FILE="$CONFIG_PATH/${options[selection]}"
+      break
+    fi
+
+    echo "Unknown selection, try again"
     echo ""
-    continue
-  fi
-
-  # test if selection exists
-  if [ ${options[selection]+exists} ]
-  then
-    echo "$CONFIG_PATH/${options[selection]}" > $LAST_SELECTION_FILE
-    #echo "$SCRIPT_PATH/versions/${options[selection]}"
-    CONFIG_FILE="$CONFIG_PATH/${options[selection]}"
-    break
-  fi
-
-  echo "Unknown selection, try again"
-  echo ""
-done
+  done
+fi
 
 CURRENT_MD5=`md5sum $SCRIPT_PATH/config/squid.conf | awk '{print $1}'`
 NEW_MD5=`md5sum $CONFIG_FILE | awk '{print $1}'`
