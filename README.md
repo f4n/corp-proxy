@@ -11,7 +11,7 @@ in the container and you never have to reconfiguring your application
 settings (like browser proxy, package manager proxy, dev-tools ...) separately.
 
 Thank you to [chrisdaish](https://github.com/chrisdaish/docker-squid) for the inital container.
-It's a slim image (18MB) of Squid 3.5.23 running under Alpine Linux 3.2.
+It's a slim image (~18MB) of Squid running under Alpine Linux.
 
 How to use
 =========
