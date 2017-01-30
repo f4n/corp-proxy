@@ -85,7 +85,7 @@ done
 CURRENT_MD5=`md5sum $SCRIPT_PATH/config/squid.conf | awk '{print $1}'`
 NEW_MD5=`md5sum $CONFIG_FILE | awk '{print $1}'`
 
-DOCKER_ID=`docker ps -a | grep corp-proxy:latest | awk '{print $1}'`
+DOCKER_ID=`docker ps | grep corp-proxy:latest | awk '{print $1}'`
 
 # check if a proxy with selected setting already running
 if [ "$CURRENT_MD5" == "$NEW_MD5" ]
@@ -97,6 +97,8 @@ then
     exit 0
   fi
 fi
+
+DOCKER_ID=`docker ps -a | grep corp-proxy:latest | awk '{print $1}'`
 
 # check if old proxy is running and stop
 if [ -n "$DOCKER_ID" ]
