@@ -56,6 +56,20 @@ After that you do the following
 proxy # just call this
 ```
 
+Optional:
+
+You can add the proxy script with the default option in your .bashrc. 
+This option will use the last selected proxy setting directly an starts the proxy on login.
+
+```
+vi ~/.bashrc
+```
+And add at the end
+
+```
+/your-path-to-repo/proxy default > /dev/null
+``
+
 
 
 Expert Mode: Run it on your own
