@@ -68,7 +68,7 @@ And add at the end
 
 ```
 /your-path-to-repo/proxy default > /dev/null
-``
+```
 
 
 
