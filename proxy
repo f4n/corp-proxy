@@ -86,7 +86,11 @@ then
   done
 fi
 
-CURRENT_MD5=`md5sum $SCRIPT_PATH/config/squid.conf | awk '{print $1}'`
+CURRENT_MD5="-"
+if [ -f "$SCRIPT_PATH/config/squid.conf" ]
+then
+  CURRENT_MD5=`md5sum $SCRIPT_PATH/config/squid.conf | awk '{print $1}'`
+fi
 NEW_MD5=`md5sum $CONFIG_FILE | awk '{print $1}'`
 
 DOCKER_ID=`docker ps | grep corp-proxy:latest | awk '{print $1}'`
