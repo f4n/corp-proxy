@@ -33,9 +33,9 @@ build.sh http://proxy-ip:proxy-port # to create a docker image with the name cor
 Configuring
 -----------
 
-Available configurations will be store in *.setting files which will be
-linked to as squid.conf file by the start script.
-In the config folder tho basic setting files available,
+Available configurations will be stored in *.setting files which will be
+linked to an squid.conf file by the start script.
+In the config folder two basic setting files available,
 * 'default.setting' which is the "home" setting, no forward proxying
 * 'company.setting.example' which is a basic example of a company forwad proxy setting
 
@@ -48,7 +48,7 @@ You could use as many .setting files as you want.
 Start/Switch proxy setting
 --------------------------
 
-I recommend to export the corp-proxy path to your PATH variable in the .bashrc
+I recommend to export the corp-proxy path to your PATH variable in e.g. the .bashrc
 
 After that you do the following
 
